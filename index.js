@@ -1,11 +1,15 @@
 require("dotenv").config();
-const { shopifyApi, LATEST_API_VERSION } = require("@shopify/shopify-api");
 const express = require("express");
+const { shopifyApi, LATEST_API_VERSION } = require("@shopify/shopify-api");
+const { default: shopifyNodeAdapter } = require("@shopify/shopify-api/adapters/node"); // Import the Node adapter
+
+// Apply the adapter
+shopifyNodeAdapter();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Initialize the Shopify API context using shopifyApi
+// Initialize the Shopify API context
 const shopify = shopifyApi({
     apiKey: process.env.SHOPIFY_API_KEY,
     apiSecretKey: process.env.SHOPIFY_API_SECRET,
