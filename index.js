@@ -1,11 +1,10 @@
 require('dotenv').config();
 const express = require("express");
-const { shopifyApp, LATEST_API_VERSION } = require("@shopify/shopify-api");
-const { Shopify } = require("@shopify/shopify-api/dist/cjs/index.js");
-const { shopifyNodeAdapter } = require("@shopify/shopify-api/adapters/node");
+const { shopifyApp, LATEST_API_VERSION } = require("@shopify/shopify-api"); // Import the main shopify API
+const { shopifyNodeAdapter } = require("@shopify/shopify-api/adapters/node"); // Import the Node adapter
 
 // Initialize the Shopify Node adapter
-shopifyNodeAdapter(); 
+shopifyNodeAdapter();
 
 // Initialize Express app
 const app = express();
@@ -25,7 +24,7 @@ const shopify = shopifyApp({
         path: "/auth",
         callbackPath: "/auth/callback",
     },
-    sessionStorage: new Shopify.Session.MemorySessionStorage(), // Simple session storage
+    sessionStorage: new (require("@shopify/shopify-api").Session.MemorySessionStorage)(), // Simple session storage
 });
 
 // Authentication route
