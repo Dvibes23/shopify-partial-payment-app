@@ -1,26 +1,19 @@
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
-const { shopifyApp, LATEST_API_VERSION, MemorySessionStorage } = require("@shopify/shopify-api"); 
+const { shopifyApi, LATEST_API_VERSION } = require("@shopify/shopify-api"); 
 
 // Initialize Express app
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Initialize Shopify app context
-const shopify = shopifyApp({
-    api: {
-        apiKey: process.env.SHOPIFY_API_KEY,
-        apiSecretKey: process.env.SHOPIFY_API_SECRET,
-        scopes: process.env.SCOPES ? process.env.SCOPES.split(",") : [],
-        hostName: process.env.HOST.replace(/https?:\/\//, ""), // Remove protocol
-        apiVersion: LATEST_API_VERSION,
-        isEmbeddedApp: false,
-    },
-    auth: {
-        path: "/auth",
-        callbackPath: "/auth/callback",
-    },
-    sessionStorage: new MemorySessionStorage(), // Use in-memory session storage
+const shopify = shopifyApi({
+    apiKey: process.env.SHOPIFY_API_KEY,
+    apiSecretKey: process.env.SHOPIFY_API_SECRET,
+    scopes: process.env.SCOPES ? process.env.SCOPES.split(",") : [],
+    hostName: process.env.HOST.replace(/https?:\/\//, ""), // Remove protocol
+    apiVersion: LATEST_API_VERSION,
+    isEmbeddedApp: false,
 });
 
 // Authentication route
