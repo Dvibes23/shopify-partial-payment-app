@@ -1,6 +1,10 @@
 require("dotenv").config();
 const express = require("express");
-const { shopifyApi, LATEST_API_VERSION } = require("@shopify/shopify-api"); 
+const { shopifyApi, LATEST_API_VERSION } = require("@shopify/shopify-api");
+const { shopifyNodeAdapter } = require("@shopify/shopify-api/adapters/node");
+
+// Initialize the Node adapter for Shopify API (this is required for Node environments)
+shopifyNodeAdapter(); 
 
 // Initialize Express app
 const app = express();
