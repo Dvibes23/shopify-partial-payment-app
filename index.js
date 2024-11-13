@@ -1,10 +1,10 @@
 require("dotenv").config();
 const express = require("express");
 const { shopifyApi, LATEST_API_VERSION } = require("@shopify/shopify-api");
-const { default: shopifyNodeAdapter } = require("@shopify/shopify-api/adapters/node"); // Import the Node adapter
+const { NodeAdapter } = require("@shopify/shopify-api/adapters/node"); // Correctly import NodeAdapter
 
 // Apply the adapter
-shopifyNodeAdapter();
+NodeAdapter.initialize(); // Initialize the adapter specifically for Node.js
 
 const app = express();
 const PORT = process.env.PORT || 3001;
